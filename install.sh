@@ -73,11 +73,26 @@ whtext
 }
 
 f_install_tomcat(){
+whtext
 	wget  $TOMCAT_DOWNLOAD
 	sudo mkdir -p $ALF_HOME
 	tar xf "$(find . -type f -name "apache-tomcat*")"
 	sudo mv "$(find . -type d -name "apache-tomcat*")" $TOMCAT	
 
+}
+
+f_install_addons(){
+whtext
+	sudo apt-get install imagemagick ghostscript libgs-dev libjpeg62 libpng3 ffmpeg -y
+	sudo apt-get install -f -y
+	sudo add-apt-repository ppa:guilhem-fr/swftools
+	sudo apt-get update
+	sudo apt-get install swftools -y	
+}
+
+f_install_office(){
+whtext	
+	sudo apt-get install libreoffice ttf-mscorefonts-installer fonts-droid -y
 }
 
 info
@@ -123,7 +138,25 @@ if [ "$in_tomcat" = "y" ]; then
 info
 	echo "Finish install Tomcat"
 else
-	echo "Install Tomcat"
+	echo "Skipping install Tomcat"
+fi
+
+read -e -p "Install Libreoffice [y/n] " -i "n" in_libreoffice
+if [ "$in_libreoffice" = "y" ]; then
+	f_install_office
+info
+	echo "Finish LibreOffice"
+else
+	echo "Skipping install libreoffice"
+fi
+
+read -e -p "Install ImageMagick MPEG Swftools [y/n] " -i "n" in_addons
+if [ "$in_addons" = "y" ]; then
+	f_install_addons
+info
+	echo "Finish ImageMagic and MPEG, Swftools"
+else
+	echo "Skipping install ImageMagick, MPEG,Swftools"
 fi
 
 whtext 
