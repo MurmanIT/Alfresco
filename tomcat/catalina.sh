@@ -97,8 +97,6 @@
 # $Id: catalina.sh 1515929 2013-08-20 19:11:24Z markt $
 # -----------------------------------------------------------------------------
 # Server on 2Gb
-JAVA_OPTS="-XX:MaxPermSize=160m -XX:NewSize=256m -Xms512m "
-JAVA_OPTS="$JAVA_OPTS –Xmx2048m -Xss512K  "
 
 # OS specific support.  $var _must_ be set to either true or false.
 cygwin=false
