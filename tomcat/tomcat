@@ -1,0 +1,25 @@
+#! /bin/sh
+#
+# Providers: tomcat
+# Author Anton Drelin
+# Year 2014
+
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export ALF_HOME=/opt/alfresco
+export TOMCAT=$ALF_HOME/tomcat
+
+case "$1" in
+	start)
+	sh $TOMCAT/bin/startup.sh
+	;;
+	stop)
+	sh $TOMCAT/bin/shutdown.sh
+	;;
+	restart)
+	sh $TOMCAT/bin/shutdown.sh
+	sh $TOMCAT/bin/startup.sh
+	;;
+esac
+exit 0
+
+
